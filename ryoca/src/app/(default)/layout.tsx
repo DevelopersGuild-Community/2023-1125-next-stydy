@@ -1,4 +1,9 @@
-function DefaultLayout({ children }: { children: React.ReactNode }) {
+import { Profile } from '@/types'
+
+async function DefaultLayout({ children }: { children: React.ReactNode }) {
+  const res = await fetch('http://localhost:3080/profile')
+  const data = (await res.json()) as Profile
+
   return (
     <div className="layout_wrapper">
       <nav>
@@ -45,9 +50,9 @@ function DefaultLayout({ children }: { children: React.ReactNode }) {
 
         <div className="side_profile">
           <div className="side_profile-image">
-            <img src="images/profile.jpg" alt="profile" />
+            <img src={data.userImageUrl} alt="profile" />
           </div>
-          <p>RyoCa@ryocacode</p>
+          <p>{data.userName}</p>
         </div>
       </nav>
       <main>{children}</main>

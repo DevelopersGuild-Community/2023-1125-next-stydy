@@ -1,21 +1,29 @@
-function HomeLayout({ children }: { children: React.ReactNode }) {
+import { Profile } from '@/types'
+import Link from 'next/link'
+
+async function HomeLayout({ children }: { children: React.ReactNode }) {
+  const res = await fetch('http://localhost:3080/profile')
+  const data = (await res.json()) as Profile
+
   return (
     <>
       <div className="header">
         <h2>
-          <a href="#">おすすめ</a>
+          <Link href="/home/recommendations" scroll={true} prefetch={false}>
+            おすすめ
+          </Link>
         </h2>
         <h2>
-          <a href="#" className="active">
+          <Link href="/home/follows" scroll={true} prefetch={false}>
             フォロー
-          </a>
+          </Link>
         </h2>
       </div>
 
       <div className="post_box">
         <form>
           <div className="post_box-input">
-            <img src="images/profile.jpg" alt="profile" />
+            <img src={data.userImageUrl} alt="profile" />
             <input type="text" name="text" placeholder="いまどうしてる？" />
             <label>
               <input type="file" name="file" style={{ display: 'none' }} />
