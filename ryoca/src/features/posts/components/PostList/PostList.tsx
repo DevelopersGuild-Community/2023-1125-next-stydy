@@ -1,6 +1,7 @@
 'use client'
 import { PostItem } from '@/types'
-import { useMemo, useRef, useState } from 'react'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 
 function PostList({
@@ -21,7 +22,6 @@ function PostList({
 
         const lastId = items[items.length - 1].id
         const data = await fetchItems(lastId)
-        console.dir(data)
         if (data.length < 5) {
           setHasMore(false)
         }
@@ -61,7 +61,9 @@ function PostList({
                   <div>{item.postText}</div>
                 </div>
               </div>
-              <img src={item.postImageUrl} className="post_image" />
+              <Link href={`/post/${item.id}`}>
+                <img src={item.postImageUrl} className="post_image" />
+              </Link>
 
               <div className="post_footer">
                 <span className="material-icons">chat</span>

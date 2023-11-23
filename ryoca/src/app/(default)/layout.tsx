@@ -1,6 +1,6 @@
 import { Profile } from '@/types'
 
-async function DefaultLayout({ children }: { children: React.ReactNode }) {
+async function DefaultLayout({ children, modal }: { children: React.ReactNode, modal: React.ReactNode }) {
   const res = await fetch('http://localhost:3080/profile')
   const data = (await res.json()) as Profile
 
@@ -65,12 +65,7 @@ async function DefaultLayout({ children }: { children: React.ReactNode }) {
         <div className="aside_container">トレンド</div>
       </aside>
 
-      <div id="imageModal" className="image_modal" role="modal">
-        <a href="" className="image_modal-close">
-          <span className="material-icons">close</span>
-        </a>
-        <img src="images/post.png" className="image_modal-content" />
-      </div>
+      {modal}
     </div>
   )
 }

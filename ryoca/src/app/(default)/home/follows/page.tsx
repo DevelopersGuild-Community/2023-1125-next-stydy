@@ -7,7 +7,10 @@ async function fetchItems(lastId: string) {
   'use server'
 
   const res = await fetch(
-    `http://localhost:3080/posts/follows?lastId=${lastId}`
+    `http://localhost:3080/posts/follows?lastId=${lastId}`,
+    {
+      cache: 'no-cache',
+    }
   )
   const data = (await res.json()) as PostItem[]
 
@@ -15,7 +18,7 @@ async function fetchItems(lastId: string) {
 }
 
 export default async function Page() {
-  const res = await fetch('http://localhost:3080/posts/follows?lastId=10')
+  const res = await fetch('http://localhost:3080/posts/follows')
   const data = (await res.json()) as PostItem[]
 
   return (
