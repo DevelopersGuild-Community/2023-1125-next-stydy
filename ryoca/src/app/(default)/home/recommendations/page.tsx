@@ -5,10 +5,7 @@ async function fetchItems(lastId: string) {
   'use server'
 
   const res = await fetch(
-    `http://localhost:3080/posts/follows?lastId=${lastId}`,
-    {
-      cache: 'no-cache',
-    }
+    `http://localhost:3080/posts/follows?lastId=${lastId}`
   )
   const data = (await res.json()) as PostItem[]
 

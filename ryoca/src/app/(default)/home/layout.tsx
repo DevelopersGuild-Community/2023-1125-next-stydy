@@ -1,5 +1,5 @@
+import Tabs from '@/components/Tabs/Tabs'
 import { Profile } from '@/types'
-import Link from 'next/link'
 
 async function HomeLayout({ children }: { children: React.ReactNode }) {
   const res = await fetch('http://localhost:3080/profile')
@@ -7,18 +7,12 @@ async function HomeLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <div className="header">
-        <h2>
-          <Link href="/home/recommendations" scroll={true} prefetch={false}>
-            おすすめ
-          </Link>
-        </h2>
-        <h2>
-          <Link href="/home/follows" scroll={true} prefetch={false}>
-            フォロー
-          </Link>
-        </h2>
-      </div>
+      <Tabs
+        items={[
+          { text: 'おすすめ', href: '/home/recommendations' },
+          { text: 'ホーム', href: '/home/follows' },
+        ]}
+      ></Tabs>
 
       <div className="post_box">
         <form>
