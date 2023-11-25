@@ -1,6 +1,12 @@
 import { Profile } from '@/types'
 
-async function DefaultLayout({ children, modal }: { children: React.ReactNode, modal: React.ReactNode }) {
+async function DefaultLayout({
+  children,
+  modal,
+}: {
+  children: React.ReactNode
+  modal: React.ReactNode
+}) {
   const res = await fetch('http://localhost:3080/profile')
   const data = (await res.json()) as Profile
 

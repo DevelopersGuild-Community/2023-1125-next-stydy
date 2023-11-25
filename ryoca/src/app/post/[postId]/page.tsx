@@ -1,7 +1,7 @@
-import { PostItem } from "@/types"
-import Link from "next/link"
+import { PostItem } from '@/types'
+import Link from 'next/link'
 
-async function PostModal(params: { postId: string }) {
+async function PostModal({ params }: { params: { postId: string } }) {
   const res = await fetch(`http://localhost:3080/posts/${params.postId}`)
   const data = (await res.json()) as PostItem
 
